@@ -1,17 +1,48 @@
+@charset "utf-8";
+
 :root {
   --header-height: 40px;
   --spacing: 4px;
 
+  --font-size: 12px;
+
   --page-padding: calc(var(--spacing, 4px) * 8);
 
-  --shadow: 1px 1px 8px rgb(0,0,0,.2);
+  --shadow: 2px 2px 8px rgb(0,0,0,.2);
+
+  --light-color: 255,255,255;
+  --text-color: 70,70,70;
+
+  --theme-color: 10,10,10;
+
+  --bold: 700;
+}
+
+
+@font-face {
+  font-family: Diphylleia;
+  src: url('./assets/fonts/Diphylleia/Diphylleia-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Carattere;
+  src: url('./assets/fonts/Carattere/Carattere-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
 }
 
 html, body {
+  font-family: Diphylleia;
+  /* font-family: Carattere; */
   padding: 0;
   margin: 0;
 
   min-width: 320px;
+
+  background-color: rgba(var(--theme-color), .01);
+  color: rgb(var(--text-color));
 }
 
 header {
@@ -23,6 +54,12 @@ header {
   padding: 0 var(--page-padding);
 
   box-shadow: var(--shadow);
+
+  background-color: rgba(var(--light-color), 1);
+  filter: blur(20);
+
+  position: sticky;
+  top: 0;
 }
 
 ul {
@@ -36,29 +73,89 @@ li {
 }
 
 main {
-  margin: var(--page-padding);
+  margin: 0 var(--page-padding);
 
 }
 
 section {
-
+  margin: var(--page-padding) 0;
+  height: calc(100vh - var(--header-height) - (var(--page-padding) * 2));
 }
 
 article {
-  box-shadow: var(--shadow);
-  padding: calc(var(--spacing, 4px) * 3);
+  /* box-shadow: var(--shadow); */
+  box-shadow: 2px 2px 8px rgb(0,0,0,.2);
+  padding: calc(var(--spacing, 4px) * 8);
+  background-color: rgba(var(--light-color), 1);
 
   border-radius: calc(var(--spacing, 4px) * 3);
 }
+
+article.full { height: -webkit-fill-available; }
 
 p,h1,h2,h3,h4,h5,h6 {
   margin: 0px;
   padding: 0px;
 }
 
-h1 { margin-bottom: calc(var(--spacing, 4px) * 6) }
-h2 { margin-bottom: calc(var(--spacing, 4px) * 5) }
-h3 { margin-bottom: calc(var(--spacing, 4px) * 4) }
-h4 { margin-bottom: calc(var(--spacing, 4px) * 3) }
-h5 { margin-bottom: calc(var(--spacing, 4px) * 2) }
-h6 { margin-bottom: calc(var(--spacing, 4px) * 1) }
+a {
+  text-decoration: none;
+  color: rgba(var(--text-color), .5);
+}
+
+a:hover {
+  color: rgba(var(--theme-color), 1);
+}
+a:visited {
+  font-weight: var(--bold);
+}
+
+h1 { font-size: calc(var(--font-size) * 2.0); margin-bottom: calc(var(--spacing, 4px) * 6); }
+h2 { font-size: calc(var(--font-size) * 1.8); margin-bottom: calc(var(--spacing, 4px) * 5); }
+h3 { font-size: calc(var(--font-size) * 1.6); margin-bottom: calc(var(--spacing, 4px) * 4); }
+h4 { font-size: calc(var(--font-size) * 1.4); margin-bottom: calc(var(--spacing, 4px) * 3); }
+h5 { font-size: calc(var(--font-size) * 1.2); margin-bottom: calc(var(--spacing, 4px) * 2); }
+h6 { font-size: calc(var(--font-size) * 1.0); margin-bottom: calc(var(--spacing, 4px) * 1); }
+
+/* layouts class */
+div.grid { display: flex; flex-wrap: wrap; }
+
+div.row {
+  display: flex;
+  flex-direction: column;
+}
+
+:where(div.grid, div.row).between { justify-content: space-between; }
+:where(div.grid, div.row).center { justify-content: center; }
+:where(div.grid, div.row).full { height: 100%; }
+:where(div.grid, div.row)>.flex-1 { flex: 1; }
+:where(div.grid, div.row).gap-1 { gap: calc(var(--spacing, 4px) * 1); }
+:where(div.grid, div.row).gap-2 { gap: calc(var(--spacing, 4px) * 2); }
+:where(div.grid, div.row).gap-3 { gap: calc(var(--spacing, 4px) * 3); }
+:where(div.grid, div.row).gap-4 { gap: calc(var(--spacing, 4px) * 4); }
+:where(div.grid, div.row).gap-5 { gap: calc(var(--spacing, 4px) * 5); }
+:where(div.grid, div.row).gap-6 { gap: calc(var(--spacing, 4px) * 6); }
+:where(div.grid, div.row).gap-7 { gap: calc(var(--spacing, 4px) * 7); }
+:where(div.grid, div.row).gap-8 { gap: calc(var(--spacing, 4px) * 8); }
+:where(div.grid, div.row).gap-9 { gap: calc(var(--spacing, 4px) * 9); }
+:where(div.grid, div.row).gap-10 { gap: calc(var(--spacing, 4px) * 10); }
+
+/* */
+.circle { border-radius: 50%; }
+
+
+.bg-theme {
+  background-color: rgba(var(--theme-color), 1);
+}
+.bg-theme-per-10 {
+  background-color: rgba(var(--theme-color), .1);
+}
+.bg-theme-gradient {
+  /* background-color: rgba(var(--theme-color), .1); */
+  background-color: linear-gradient(
+    135deg,
+    rgba(var(--theme-color), .01) 0%,
+    rgba(var(--theme-color), .1) 3%,
+    rgba(var(--theme-color), 1) 100%,
+  );
+}
